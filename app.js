@@ -1,9 +1,15 @@
 const express = require('express');
 const app = express();
-const productRoutes = require('./api/routes/products')
-const ordersRoutes = require('./api/routes/orders')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const mongoose = require(`mongoose`)
+
+const productRoutes = require('./api/routes/products')
+const ordersRoutes = require('./api/routes/orders')
+
+mongoose.connect("mongodb+srv://admin:"+process.env.MONGO_ATLAS_PW+"@cluster0.tlihn.mongodb.net/shop?retryWrites=true&w=majority", {
+    useNewUrlParser:true, useUnifiedTopology:true
+})
 
 app.use(morgan("dev"))
 app.use(bodyParser.urlencoded({extended:false}))
